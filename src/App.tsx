@@ -8,8 +8,9 @@ import ShoppingCart from "./components/ShoppingCart.tsx";
 import Bread from "./components/Bread.tsx";
 import Dairy from "./components/Dairy.tsx";
 import {navItems, productItems} from "./configurations/nav-config.ts";
-import NavLayout from "./components/navigation/NavLayout.tsx";
+//import NavLayout from "./components/navigation/NavLayout.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
+import NavigatorDesktop from "./components/navigation/NavigatorDesktop.tsx";
 
 
 function App() {
@@ -17,12 +18,12 @@ function App() {
   return (
       <Routes>
         {/*<Route path={Paths.HOME} element={<Layout/>}>*/}
-        <Route path={Paths.HOME} element={<NavLayout items={navItems}/>}>
+        <Route path={Paths.HOME} element={<NavigatorDesktop items={navItems}/>}>
           <Route index element={<Home/>}/>
           <Route path={Paths.CUSTOMERS} element={<Customers/>}/>
           <Route path={Paths.ORDERS} element={<Orders/>}/>
           {/*<Route path={Paths.PRODUCTS} element={<Products/>}/>*/}
-          <Route path={Paths.PRODUCTS} element={<NavLayout items={productItems} sub={'sub'}/>}>
+          <Route path={Paths.PRODUCTS} element={<NavigatorDesktop items={productItems}/>}>
             <Route path={Paths.BREAD} element={<Bread/>}/>
             <Route path={Paths.DAIRY} element={<Dairy/>}/>
           </Route>

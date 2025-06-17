@@ -12,8 +12,8 @@ const ErrorPage = () => {
 
 
     useEffect(() => {
-        if (performance.getEntriesByType("navigation")[0].type === "reload") {
-            //if (performance.navigation.type === 1)
+        if (performance.navigation.type === 1) {
+            //if (performance.navigation.type === 1performance.getEntriesByType("navigation")[0].type === "reload")
             navigate(Paths.HOME);
         }
     }, [navigate]);
