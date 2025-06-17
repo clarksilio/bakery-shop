@@ -7,6 +7,7 @@ export enum Paths {
     BREAD = 'bread',
     DAIRY = 'dairy',
     ERRORPAGE = 'error',
+    BACK = 'home'
 }
 
 export type RouteType = {
