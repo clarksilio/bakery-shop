@@ -2,18 +2,19 @@ import type {FC} from "react";
 import type {RouteType} from "../../utils/shop-types.ts";
 import {NavLink, Outlet} from "react-router-dom";
 
-type Props ={
-    items: RouteType[]
+type Props = {
+    items: RouteType[],
     sub?:string
 }
-const NavLayout:FC<Props> = ({items, sub}) => {
+const Navigator:FC<Props> = ({items,sub}) => {
     return (
         <div>
             <nav>
-                <ul className={`nav-list ${sub}`}>
+                <ul className={`nav-list ${sub}`} >
                     {
                         items.map(item =>
-                            <NavLink to={item.path} key={item.path} style={{textDecorationLine:"none"}}><li>{item.title}</li></NavLink>)
+                        <NavLink to={item.path} key={item.path} style={{textDecorationLine:"none"}}><li>{item.title}</li></NavLink>
+                        )
                     }
                 </ul>
             </nav>
@@ -22,4 +23,4 @@ const NavLayout:FC<Props> = ({items, sub}) => {
     );
 };
 
-export default NavLayout;
+export default Navigator;

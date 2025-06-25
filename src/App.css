@@ -11,18 +11,16 @@
   font-size: 1.2rem;
   list-style: none;
 }
-
 .nav-list li{
   margin-right: 2rem;
-
+  text-decoration: none;
 }
 
 .active{
-  color: orange;
+  color:orange;
   font-size: 1.3rem;
 }
-
 .sub{
   flex-direction: column;
-  align-items: flex-start;
+  align-items: start;
 }
