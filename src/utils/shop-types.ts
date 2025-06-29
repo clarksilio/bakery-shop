@@ -31,3 +31,7 @@ export type ProductType = {
     price: number,
     image: string,
 }
+
+export type Category = {
+    category_name:string
+}

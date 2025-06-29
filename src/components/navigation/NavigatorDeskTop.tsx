@@ -14,9 +14,10 @@ const NavigatorDeskTop: FC<Props> = ({items}) => {
     const {pathname} = useLocation();
     console.log(pathname)
     useEffect(() => {
-        const index = items.findIndex(item => item.path === pathname.substring(1) )
-        if(value !== index)
-            setValue(Math.max(index,0));
+        const activePageIndex = items.findIndex(item => item.path === pathname.substring(1) )
+        if(activePageIndex < items.length)
+            setValue(Math.max(activePageIndex,0));
+        else setValue(0)
     }, [pathname]);
 
     const handleOnChange =
