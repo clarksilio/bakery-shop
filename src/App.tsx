@@ -8,7 +8,7 @@ import Orders from "./components/Orders.tsx";
 import ShoppingCart from "./components/ShoppingCart.tsx";
 //import ProductLayout from "./components/navigation/ProductLayout.tsx";
 import Dairy from "./components/Dairy.tsx";
-import Bread from "./components/Bread.tsx";
+import Bread from "./components/Bread/Bread.tsx";
 //import Navigator from "./components/navigation/Navigator.tsx";
 import {navItems, productItems} from "./configurations/nav-config.ts";
 import ErrorPage from "./components/servicePages/ErrorPage.tsx";
@@ -16,17 +16,29 @@ import {useEffect} from "react";
 import NavigatorDeskTop from "./components/navigation/NavigatorDeskTop.tsx";
 import Login from "./components/servicePages/Login.tsx";
 import Logout from "./components/servicePages/Logout.tsx";
-import {Roles, type RouteType} from "./utils/shop-types.ts";
-import {useAppSelector} from "./redux/hooks.ts";
+import {type ProductType, Roles, type RouteType} from "./utils/shop-types.ts";
+import {useAppDispatch, useAppSelector} from "./redux/hooks.ts";
 import Registration from "./components/servicePages/Registration.tsx";
+import {getProducts} from "./firebase/firebaseDBService.ts";
+import {prodsUpd} from "./redux/slices/productSlice.ts";
 
 function App() {
     const location = useLocation();
     const navigate = useNavigate();
     const {authUser} = useAppSelector(state => state.auth)
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
         if(location.pathname === `/${Paths.ERROR}`)
             navigate('/')
+    }, []);
+    useEffect(() => {
+      const subscription = getProducts().subscribe({
+          next: (prods: ProductType[]) => {
+              dispatch(prodsUpd(prods))
+          }
+      })
+        return () => {subscription.unsubscribe()};
     }, []);
 
     const predicate = (item:RouteType) => {

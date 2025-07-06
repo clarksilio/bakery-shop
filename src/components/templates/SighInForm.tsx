@@ -39,7 +39,7 @@ export const SignInContainer = styled(Stack)(({theme}) => ({
 }));
 
 type Props = {
-    submitFn: (loginData:LoginData) => void
+    submitFn: (loginData: LoginData) => void
 }
 
 export default function SignInForm(props: Props) {
@@ -170,7 +170,7 @@ export default function SignInForm(props: Props) {
                     <Button
                         fullWidth
                         variant="outlined"
-                        onClick={() => props.submitFn({email:"GOOGLE", password:""})}
+                        onClick={() => props.submitFn({email: "GOOGLE", password: ""})}
                         startIcon={<GoogleIcon/>}
                     >
                         Sign in with Google
