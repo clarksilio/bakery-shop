@@ -10,11 +10,25 @@ export type ProductType = {
  */
 
 import {useAppSelector} from "../../redux/hooks.ts";
-import {DataGrid, type GridColDef} from "@mui/x-data-grid";
+import {DataGrid, GridActionsCellItem, type GridColDef} from "@mui/x-data-grid";
 import {Avatar, Box} from "@mui/material";
+import {getProducts, removeProduct} from "../../firebase/firebaseDBService.ts";
+import {useDispatch} from "react-redux";
+import {RemoveIcon} from "../templates/CustomIcons.tsx";
+import {prodsUpd} from "../../redux/slices/productSlice.ts";
 
 const BreadProductsAdmin = () => {
     const {currProds} = useAppSelector(state => state.products)
+    const dispatch = useDispatch();
+
+    const handleRemove = async (id: string) => {
+        await removeProduct(id);
+
+        getProducts().subscribe((updatedProducts) => {
+            dispatch(prodsUpd(updatedProducts));
+        });
+    };
+
     const rows = currProds;
     const columns : GridColDef<(typeof rows)[number]>[] = [
         { field: 'id', headerName: 'ID', width: 90, flex:0.3 },
@@ -26,7 +40,19 @@ const BreadProductsAdmin = () => {
             return(
                 <Avatar src={'/images/' + params.value}/>
             )
-            } },
+            }},
+        {
+            field: 'actions', type: 'actions', headerName: 'Actions', flex: 0.3,
+            getActions: ({ id }) => [
+                <GridActionsCellItem
+                    label="Delete"
+                    icon={<RemoveIcon />}
+                    onClick={() => handleRemove(id as string)}
+                    showInMenu={false}
+                />
+            ]
+        },
+
     ]
 
     return (
